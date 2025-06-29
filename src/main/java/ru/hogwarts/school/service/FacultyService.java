@@ -21,6 +21,7 @@ public class FacultyService {
 
     @Transactional
     public Faculty addFaculty(Faculty newFaculty) {
+
         return facultyRepository.save(newFaculty);
     }
 
@@ -32,6 +33,7 @@ public class FacultyService {
 
     @Transactional
     public Faculty editFaculty(Faculty updateFaculty) {
+
         return facultyRepository.save(updateFaculty);
     }
 
@@ -44,6 +46,16 @@ public class FacultyService {
 
     @Transactional
     public Collection<Faculty> filterForColor(String color) {
-        return facultyRepository.findByColor(color);
+        return facultyRepository.findByColorIgnoreCase(color);
+    }
+
+    @Transactional
+    public Collection<Faculty> filterForName(String name) {
+        return facultyRepository.findByNameIgnoreCase(name);
+    }
+
+    @Transactional
+    public Set<Student> getFacultyStudents(long id) {
+        return getFaculty(id).getStudents();
     }
 }

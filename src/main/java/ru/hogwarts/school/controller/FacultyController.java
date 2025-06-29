@@ -45,8 +45,18 @@ public class FacultyController {
         return facultyService.deleteFaculty(id);
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/filter/color")
     public Collection<Faculty> filterForColor(@RequestParam String color) {
         return facultyService.filterForColor(color);
+    }
+
+    @GetMapping("/filter/name")
+    public Collection<Faculty> filterForName(@RequestParam String name) {
+        return facultyService.filterForName(name);
+    }
+
+    @GetMapping("/students/{id}")
+    public Collection<Student> getFacultyStudents(@PathVariable Long id) {
+        return facultyService.getFacultyStudents(id);
     }
 }
