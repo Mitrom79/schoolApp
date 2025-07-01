@@ -12,6 +12,7 @@ import java.util.*;
 
 @Service
 public class FacultyService {
+    
     private final FacultyRepository facultyRepository;
 
     @Autowired
@@ -45,13 +46,20 @@ public class FacultyService {
     }
 
     @Transactional
-    public Collection<Faculty> filterForColor(String color) {
-        return facultyRepository.findByColorIgnoreCase(color);
-    }
+    public Collection<Faculty> filterFaculties(String name, String color) {
+        if (name != null && color != null) {
 
-    @Transactional
-    public Collection<Faculty> filterForName(String name) {
-        return facultyRepository.findByNameIgnoreCase(name);
+            return facultyRepository.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
+        } else if (name != null) {
+
+            return facultyRepository.findByNameIgnoreCase(name);
+        } else if (color != null) {
+
+            return facultyRepository.findByColorIgnoreCase(color);
+        } else {
+
+            return facultyRepository.findAll();
+        }
     }
 
     @Transactional
