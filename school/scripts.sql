@@ -1,0 +1,25 @@
+CREATE SEQUENCE IF NOT EXISTS faculty_seq START WITH 1 INCREMENT BY 50;
+
+CREATE SEQUENCE IF NOT EXISTS student_seq START WITH 1 INCREMENT BY 50;
+
+CREATE TABLE faculty
+(
+    id    BIGINT NOT NULL,
+    name  VARCHAR(255),
+    color VARCHAR(255),
+    CONSTRAINT pk_faculty PRIMARY KEY (id)
+);
+
+CREATE TABLE student
+(
+    id         BIGINT  NOT NULL,
+    name       VARCHAR(255),
+    age        INTEGER NOT NULL,
+    faculty_id BIGINT,
+    CONSTRAINT pk_student PRIMARY KEY (id)
+);
+
+ALTER TABLE student
+    ADD CONSTRAINT FK_STUDENT_ON_FACULTY FOREIGN KEY (faculty_id) REFERENCES faculty (id);
+
+DROP TABLE students CASCADE;

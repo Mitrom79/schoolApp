@@ -12,6 +12,7 @@ import java.util.*;
 
 @Service
 public class FacultyService {
+    
     private final FacultyRepository facultyRepository;
 
     @Autowired
@@ -21,6 +22,7 @@ public class FacultyService {
 
     @Transactional
     public Faculty addFaculty(Faculty newFaculty) {
+
         return facultyRepository.save(newFaculty);
     }
 
@@ -32,6 +34,7 @@ public class FacultyService {
 
     @Transactional
     public Faculty editFaculty(Faculty updateFaculty) {
+
         return facultyRepository.save(updateFaculty);
     }
 
@@ -43,7 +46,24 @@ public class FacultyService {
     }
 
     @Transactional
-    public Collection<Faculty> filterForColor(String color) {
-        return facultyRepository.findByColor(color);
+    public Collection<Faculty> filterFaculties(String name, String color) {
+        if (name != null && color != null) {
+
+            return facultyRepository.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
+        } else if (name != null) {
+
+            return facultyRepository.findByNameIgnoreCase(name);
+        } else if (color != null) {
+
+            return facultyRepository.findByColorIgnoreCase(color);
+        } else {
+
+            return facultyRepository.findAll();
+        }
+    }
+
+    @Transactional
+    public Set<Student> getFacultyStudents(long id) {
+        return getFaculty(id).getStudents();
     }
 }
