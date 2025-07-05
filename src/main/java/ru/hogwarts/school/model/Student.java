@@ -15,6 +15,10 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    @OneToOne
+    @JoinColumn(name="avatar_id")
+    private Avatar avatar;
+
     public Student() {
 
     }
@@ -50,4 +54,16 @@ public class Student {
     }
 
     public Faculty getFaculty() { return faculty; }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
 }
