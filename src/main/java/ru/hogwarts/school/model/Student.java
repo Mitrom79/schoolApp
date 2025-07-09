@@ -1,6 +1,10 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+@JsonIgnoreProperties({"faculty", "avatar", "students",
+        "hibernateLazyInitializer", "handler"})
 
 @Entity
 public class Student {
