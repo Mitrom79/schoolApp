@@ -4,6 +4,8 @@ package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,5 +70,9 @@ public class AvatarService {
     public Avatar findAvatar(long studentId) {
         return avatarRepository.findByStudentId(studentId)
                 .orElse(new Avatar());
+    }
+    @Transactional
+    public Page<Avatar> findAll(Integer offset, Integer limit){
+        return avatarRepository.findAll(PageRequest.of(offset, limit));
     }
 }
