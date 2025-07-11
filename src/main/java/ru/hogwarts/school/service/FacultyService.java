@@ -63,7 +63,7 @@ public class FacultyService {
     }
 
     @Transactional
-    public Set<Student> getFacultyStudents(long id) {
+    public List<Student> getFacultyStudents(long id) {
         return getFaculty(id).getStudents();
     }
 }
