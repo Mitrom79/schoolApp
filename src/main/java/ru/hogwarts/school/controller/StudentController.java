@@ -1,12 +1,16 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.StudentByName;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -60,5 +64,19 @@ public class StudentController {
     @GetMapping("/faculty/{id}")
     public Faculty getStudentFaculty(@PathVariable long id) {
         return studentService.getStudentFaculty(id);
+    }
+    @GetMapping("/getNumber")
+    public Integer getNumberOfStudents() {
+        return studentService.getNumberOfStudents();
+    }
+
+    @GetMapping("/getAvg")
+    public Integer getAvgOfStudents() {
+        return studentService.getAvgOfStudents();
+    }
+
+    @GetMapping("/getLast5")
+    public Collection<StudentByName> getStudentsByName() {
+        return studentService.getStudentByName();
     }
 }
