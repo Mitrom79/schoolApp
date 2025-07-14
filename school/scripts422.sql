@@ -1,0 +1,3 @@
+CREATE TABLE person(id SERIAL, name VARCHAR, age SMALLINT, license BOOLEAN);
+CREATE TABLE car(id SERIAL, brand VARCHAR, model VARCHAR, cost INTEGER);
+ALTER TABLE person ADD id_car INTEGER REFERENCES car(id);
