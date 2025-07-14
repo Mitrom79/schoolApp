@@ -1,10 +1,13 @@
 package ru.hogwarts.school.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
@@ -51,5 +54,9 @@ public class AvatarController {
             response.setContentLength((int)avatar.getFileSize());
             is.transferTo(os);
         }
+    }
+    @GetMapping("/list")
+    public Page<Avatar> findAll(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
+        return avatarService.findAll(offset, limit);
     }
 }
