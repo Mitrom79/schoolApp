@@ -58,4 +58,14 @@ public class FacultyController {
     public Collection<Student> getFacultyStudents(@PathVariable Long id) {
         return facultyService.getFacultyStudents(id);
     }
+
+    @GetMapping("/max-length")
+    public String getFacultyWithMaxLength() {
+        return facultyService.getFacultyWithMaxLength();
+    }
+
+    @GetMapping("/stream-iterate")
+    public Integer streamIterate() {
+        return facultyService.streamIterate();
+    }
 }

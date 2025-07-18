@@ -10,6 +10,8 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
 
 import java.util.*;
+import java.util.stream.IntStream;
+
 
 
 @Service
@@ -74,4 +76,20 @@ public class FacultyService {
         logger.info("Was invoked method for get Faculty Students");
         return getFaculty(id).getStudents();
     }
+
+    public String getFacultyWithMaxLength() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("Факультетов нет");
+    }
+
+    public Integer streamIterate() {
+        return IntStream.rangeClosed(1, 1_000_000)
+                .parallel()
+                .sum();
+    }
+
+
+
 }
