@@ -89,5 +89,17 @@ public class StudentController {
     public Double getAVGAge() {
         return studentService.getAVGAge();
     }
+
+    @GetMapping("/print-parallel")
+    public ResponseEntity<String> printParallelStudents() {
+        studentService.printParallelStudents();
+        return ResponseEntity.ok("Имена студентов выведены в консоль");
+    }
+
+    @GetMapping("/print-synchronized")
+    public ResponseEntity<String> printParallelStudentsSynchronized() {
+        studentService.printParallelStudentsSynchronized();
+        return ResponseEntity.ok("Имена студентов выведены в консоль");
+    }
 }
 

@@ -17,12 +17,14 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+
 import java.util.Collection;
 import java.util.List;
 
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -225,5 +227,23 @@ public class StudentControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().getName()).isEqualTo("Первый Удаляемый");
+    }
+
+    @Test
+    public void testPrintParallelStudents() {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/student/print-parallel", String.class);
+        Mockito.verify(studentService, times(1)).printParallelStudents();
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("Имена студентов выведены в консоль");
+    }
+
+    @Test
+    public void testPrintParallelStudentsSynchronized() {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/student/print-synchronized", String.class);
+        Mockito.verify(studentService, times(1)).printParallelStudentsSynchronized();
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("Имена студентов выведены в консоль");
     }
 }
