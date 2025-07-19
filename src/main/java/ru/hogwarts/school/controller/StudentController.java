@@ -79,4 +79,15 @@ public class StudentController {
     public Collection<StudentByName> getStudentsByName() {
         return studentService.getStudentByName();
     }
+
+    @GetMapping("/getWithNameOnA")
+    public Collection<String> getWithNameOnA() {
+        return studentService.getWithNameOnA();
+    }
+
+    @GetMapping("/average-age")
+    public Double getAVGAge() {
+        return studentService.getAVGAge();
+    }
 }
+
